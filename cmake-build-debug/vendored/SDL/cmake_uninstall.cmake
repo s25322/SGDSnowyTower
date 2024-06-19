@@ -1,13 +1,13 @@
-if (NOT EXISTS "C:/Users/TheGs/Desktop/ttrpg/SGDSnowyTower/cmake-build-debug/install_manifest.txt")
-    message(FATAL_ERROR "Cannot find install manifest: \"C:/Users/TheGs/Desktop/ttrpg/SGDSnowyTower/cmake-build-debug/install_manifest.txt\"")
-endif(NOT EXISTS "C:/Users/TheGs/Desktop/ttrpg/SGDSnowyTower/cmake-build-debug/install_manifest.txt")
+if (NOT EXISTS "C:/Users/s25322/Desktop/New folder/SGDSnowyTower/cmake-build-debug/install_manifest.txt")
+    message(FATAL_ERROR "Cannot find install manifest: \"C:/Users/s25322/Desktop/New folder/SGDSnowyTower/cmake-build-debug/install_manifest.txt\"")
+endif(NOT EXISTS "C:/Users/s25322/Desktop/New folder/SGDSnowyTower/cmake-build-debug/install_manifest.txt")
 
-file(READ "C:/Users/TheGs/Desktop/ttrpg/SGDSnowyTower/cmake-build-debug/install_manifest.txt" files)
+file(READ "C:/Users/s25322/Desktop/New folder/SGDSnowyTower/cmake-build-debug/install_manifest.txt" files)
 string(REGEX REPLACE "\n" ";" files "${files}")
 foreach (file ${files})
     message(STATUS "Uninstalling \"$ENV{DESTDIR}${file}\"")
     execute_process(
-        COMMAND C:/Program Files/JetBrains/CLion 2024.1.3/bin/cmake/win/x64/bin/cmake.exe -E remove "$ENV{DESTDIR}${file}"
+        COMMAND C:/Program Files/JetBrains/CLion 2023.3.4/bin/cmake/win/x64/bin/cmake.exe -E remove "$ENV{DESTDIR}${file}"
         OUTPUT_VARIABLE rm_out
         RESULT_VARIABLE rm_retval
     )

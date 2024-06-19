@@ -1,6 +1,7 @@
 #include <SDL.h>
 #include <iostream>
 #include <memory>
+#include <string>
 #include <chrono>
 #include <thread>
 #include <random>
@@ -133,6 +134,18 @@ int main(int argc, char *argv[])
     auto longplatform_texture = load_image(renderer, "longplatform.bmp");
     auto clock_texture = load_image(renderer, "clock.bmp");
     auto carrot_texture = load_image(renderer, "carrot.bmp");
+    auto gameover_texture = load_image(renderer, "gameover.bmp");
+
+    auto one_texture = load_image(renderer, "one.bmp");
+    auto two_texture = load_image(renderer, "two.bmp");
+    auto three_texture = load_image(renderer, "three.bmp");
+    auto four_texture = load_image(renderer, "four.bmp");
+    auto five_texture = load_image(renderer, "five.bmp");
+    auto six_texture = load_image(renderer, "six.bmp");
+    auto seven_texture = load_image(renderer, "seven.bmp");
+    auto eight_texture = load_image(renderer, "eight.bmp");
+    auto nine_texture = load_image(renderer, "nine.bmp");
+    auto zero_texture = load_image(renderer, "zero.bmp");
 
     int difficulty = 1;
     int overclock = 1;
@@ -141,6 +154,7 @@ int main(int argc, char *argv[])
     bool mirror = false;
     bool still_playing = true;
     bool game_started = false;
+    std::string score;
 
     player_t player;
     player.p.v.x = 320;
@@ -287,6 +301,54 @@ int main(int argc, char *argv[])
         SDL_Rect carrot_rect = {16,64,96, 96};
         SDL_RenderCopyEx(renderer, carrot_texture.get(), NULL, &carrot_rect,game_time*360*game_started*overclock*0.05, NULL, SDL_FLIP_NONE);
 
+
+        if (player.p.v.y > 790){
+            if (player.p.v.y < 900) {
+                int tmp = (int)game_time;
+                score = std::to_string(tmp);
+            }
+            player.p.v.y = 900;
+            SDL_Rect gameover_rect = {0,0,920, 780};
+            SDL_RenderCopy(renderer, gameover_texture.get(), NULL, &gameover_rect);
+
+            int i = 0;
+            for (auto & number : score){
+                SDL_Rect number_rect = {128+i,300,64, 128};
+                switch(number){
+                    case '1':
+                        SDL_RenderCopy(renderer, one_texture.get(), NULL, &number_rect);
+                        break;
+                    case '2':
+                        SDL_RenderCopy(renderer, two_texture.get(), NULL, &number_rect);
+                        break;
+                    case '3':
+                        SDL_RenderCopy(renderer, three_texture.get(), NULL, &number_rect);
+                        break;
+                    case '4':
+                        SDL_RenderCopy(renderer, four_texture.get(), NULL, &number_rect);
+                        break;
+                    case '5':
+                        SDL_RenderCopy(renderer, five_texture.get(), NULL, &number_rect);
+                        break;
+                    case '6':
+                        SDL_RenderCopy(renderer, six_texture.get(), NULL, &number_rect);
+                        break;
+                    case '7':
+                        SDL_RenderCopy(renderer, seven_texture.get(), NULL, &number_rect);
+                        break;
+                    case '8':
+                        SDL_RenderCopy(renderer, eight_texture.get(), NULL, &number_rect);
+                        break;
+                    case '9':
+                        SDL_RenderCopy(renderer, nine_texture.get(), NULL, &number_rect);
+                        break;
+                    case '0':
+                        SDL_RenderCopy(renderer, zero_texture.get(), NULL, &number_rect);
+                        break;
+                }
+                i += 64;
+            }
+        }
 
 
         SDL_RenderPresent(renderer);
